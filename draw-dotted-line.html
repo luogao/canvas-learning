@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Canvas学习-画线</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+        }
+        
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas">
+        <p>你的浏览器不支持Canvas</p>
+    </canvas>
+    <script>
+        function canvasApp() {
+            var canvas = document.getElementById("canvas");
+            canvas.height = window.innerHeight
+            canvas.width = window.innerWidth
+            var ctx = canvas.getContext('2d');
+            var w = canvas.width;
+            var h = canvas.height;
+            ctx.clearRect(0, 0, w, h);
+            
+
+            function drawScreen() {
+                ctx.lineWidth = 5;
+
+                ctx.beginPath();
+                ctx.setLineDash([40, 30, 20])
+                ctx.strokeStyle = '#f36';
+                ctx.moveTo(10, 100)
+                ctx.lineTo(400, 100)
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.setLineDash([40, 30, 20, 10])
+                ctx.strokeStyle = "blue"
+                ctx.moveTo(10, 150)
+                ctx.lineTo(400, 150)
+                ctx.stroke()
+
+                ctx.beginPath()
+                ctx.setLineDash([5])
+                ctx.strokeStyle = "black"
+                ctx.moveTo(10, 200)
+                ctx.lineTo(400, 200)
+                ctx.stroke()
+
+                ctx.dottedLine(10, 50, 200, 200, 10); // 画圆点
+            }
+            drawScreen()
+        }
+
+        function eventWindowLoaded() {
+            var canvasPrototype = window.CanvasRenderingContext2D && CanvasRenderingContext2D.prototype;
+            canvasPrototype.dottedLine = function(x1, y1, x2, y2, interval) {
+                if (!interval) {
+                    interval = 5;
+                }
+                var isHorizontal = true;
+                if (x1 == x2) {
+                    isHorizontal = false;
+                }
+                var len = isHorizontal ? x2 - x1 : y2 - y1;
+                this.moveTo(x1, y1);
+                var progress = 0;
+                while (len > progress) {
+                    progress += interval;
+                    if (progress > len) {
+                        progress = len;
+                    }
+                    if (isHorizontal) {
+                        this.moveTo(x1 + progress, y1);
+                        this.arc(x1 + progress, y1, 1, 0, Math.PI * 2, true);
+                        this.fill();
+                    } else {
+                        this.moveTo(x1, y1 + progress);
+                        this.arc(x1, y1 + progress, 1, 0, Math.PI * 2, true);
+                        this.fill();
+                    }
+                }
+            }
+            canvasApp()
+        }
+
+        window.addEventListener('load', eventWindowLoaded, false)
+        window.addEventListener('resize', eventWindowLoaded, false)
+    </script>
+</body>
+
+</html>

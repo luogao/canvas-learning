@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Canvas学习</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+        }
+
+        canvas {
+            margin: auto;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas">
+        <p>你的浏览器不支持Canvas</p>
+    </canvas>
+    <script>
+        function canvasApp() {
+            var canvas = document.getElementById("canvas");
+            canvas.height = window.innerHeight
+            canvas.width = window.innerWidth
+            var ctx = canvas.getContext('2d');
+            var w = canvas.width;
+            var h = canvas.height;
+
+            function drawScreen() {
+                drawGrid(ctx, w, h, '#eee', 10);
+
+                var rotate = 18;
+                var scaleStart = 0;
+                var scaleEnd = 4;
+                var scaleInc = (scaleEnd - scaleStart) / (360 / rotate);
+                var s = scaleStart;
+                for (var i = 0; i <= 360; i += rotate) {
+                    s += scaleInc;
+                    ctx.fillStyle = '#dc0';
+                    ctx.save();
+                    ctx.translate(w / 2, h / 2);
+                    ctx.scale(s, s);
+                    ctx.rotate(-1 * i * Math.PI / 180);
+                    ctx.fillRect(0, 0, 1, 50);
+                    ctx.setTransform(1, 0, 0, 1, 0, 0);
+                    ctx.restore();
+                }
+                // var x = 100
+                // var y = 100
+                // var width = 100
+                // var height = 100
+                // ctx.rotate(Math.PI / 6)
+                // ctx.strokeRect(-width / 2, -height / 2, width, height)
+                // for (var i = 0; i < 10; i++) {
+                //     ctx.save();
+                //     ctx.fillStyle = 'rgb(' + (51 * i) + ',' + (255 - 51 * i) + ',255)';
+                //     for (var j = 0; j < i * 10; j++) { // 旋转坐标
+                //         ctx.rotate(Math.PI * 2 / (i * 10));
+                //         ctx.beginPath(); // 绘制圆
+                //         ctx.arc(0, i * 20, 5, 0, Math.PI * 2, true);
+                //         ctx.fill();
+                //     }
+                //     ctx.restore();
+                // }
+
+
+
+                // for (var i = 0; i < 4; i++) {
+                //     for (var j = 0; j < 4; j++) {
+                //         ctx.fillStyle = 'rgba(' + (120 + j * 10) + ',' + (185 - i * 10) + ',' + (10 + j * 3) + ',1)';
+                //         ctx.save();
+                //         ctx.translate(i * (w - 50) / 4 + (i + 1) * 10, j * (h - 50) / 4 + (j + 1) * 10);
+                //         ctx.fillRect(0, 0, (w - 50) / 4, (h - 50) / 4);
+                //         ctx.restore();
+                //     }
+                // }
+            }
+            drawScreen()
+        }
+
+        function drawGrid(ctx, w, h, stroke, steps) {
+            ctx.save()
+            ctx.beginPath()
+            for (var i = 0.5; i <= w; i += steps) {
+                ctx.moveTo(i, 0)
+                ctx.lineTo(i, h)
+            }
+            for (var i = 0.5; i <= h; i += steps) {
+                ctx.moveTo(0, i)
+                ctx.lineTo(w, i)
+            }
+            ctx.strokeStyle = stroke
+            ctx.stroke()
+            ctx.restore()
+        }
+
+        function eventWindowLoaded() {
+            canvasApp()
+        }
+        window.addEventListener('load', eventWindowLoaded, false)
+        window.addEventListener('resize', eventWindowLoaded, false)
+    </script>
+</body>
+
+</html>
+
+
+
+<!-- Canvas的坐标以左上角为原点，水平向右为X轴，垂直向下为Y轴，以像素为单位，所以每个点都是非负整数。 -->

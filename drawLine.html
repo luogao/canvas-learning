@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Canvas学习-画线</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+        }
+        
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas">
+        <p>你的浏览器不支持Canvas</p>
+    </canvas>
+    <script>
+        function canvasApp() {
+            var canvas = document.getElementById("canvas");
+            canvas.height = window.innerHeight
+            canvas.width = window.innerWidth
+            var ctx = canvas.getContext('2d');
+            var w = canvas.width;
+            var h = canvas.height;
+
+            function drawScreen() {
+                var canvasGradient = ctx.createLinearGradient(50, 50, 250, 50)
+
+                ctx.lineWidth = 4; //改变线条宽度
+                ctx.strokeStyle = '#f36'; // 改变线条颜色
+                ctx.fillStyle = '#f36'; // 改变线条颜色
+
+                ctx.beginPath();
+                ctx.moveTo(50, 10) // 让画笔移动到指定坐标,即起始点
+                ctx.lineTo(150, 10) // 第二个点(如果是一条直线,即终点)
+                ctx.lineTo(150, 200)
+                ctx.lineTo(200, 200)
+                ctx.lineTo(200, 150)
+                ctx.fill();
+                // ctx.stroke(); //沿着绘制路径的坐标点顺序绘制直线
+                ctx.closePath()
+
+
+                ctx.beginPath();
+                ctx.moveTo(250, 10) // 让画笔移动到指定坐标,即起始点
+                ctx.lineTo(350, 10) // 第二个点(如果是一条直线,即终点)
+                ctx.lineTo(350, 200)
+                ctx.lineTo(400, 200)
+                ctx.lineTo(400, 150)
+                ctx.closePath()
+                // ctx.stroke(); //沿着绘制路径的坐标点顺序绘制直线
+                ctx.fill();
+                ctx.strokeStyle = 'black';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(50, 50);
+                ctx.lineTo(350, 50);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(50.5, 100.5);
+                ctx.lineTo(350.5, 100.5);
+                ctx.closePath();
+                ctx.stroke();
+            }
+            drawScreen()
+        }
+
+        function eventWindowLoaded() {
+            canvasApp()
+        }
+
+        window.addEventListener('load', eventWindowLoaded, false)
+        window.addEventListener('resize', eventWindowLoaded, false)
+    </script>
+</body>
+
+</html>
