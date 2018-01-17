@@ -1,4 +1,4 @@
-# canvas-learning
+# Canvas Learning
 学习canvas,但愿不要入门到放弃
 
 >看着w3c里面的[Canvas学习][0]系列文章,跟着敲
