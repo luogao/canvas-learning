@@ -17,6 +17,16 @@
 - [线型][6]
 - [save()和restore()][7] //看了一半
 
+### **2018-01-22**
+在MDN看了一遍教程
+> 接下来要学习动画！
+- [基本用法][8]
+- [绘制形状][9]
+- [添加样式和颜色][10]
+- [绘制文本][11]
+- [使用图片][12]
+- [变形][13]
+
 
 [0]:https://www.w3cplus.com/search/node/Canvas%E5%AD%A6%E4%B9%A0
 [1]:https://www.w3cplus.com/canvas/introduction-to-prepare.html
@@ -26,6 +36,13 @@
 [5]:https://www.w3cplus.com/canvas/draw-dashed-and-dotted-lines.html
 [6]:https://www.w3cplus.com/canvas/canvas-line-style.html
 [7]:https://www.w3cplus.com/canvas/canvas-states.html
+
+[8]:https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Basic_usage
+[9]:https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes
+[10]:https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Applying_styles_and_colors
+[11]:https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Drawing_text
+[12]:https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Using_images
+[13]:https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Transformations
 
 
 ------
