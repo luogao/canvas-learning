@@ -1,0 +1,70 @@
+<html>
+
+<head>
+    <script type="application/javascript">
+        function draw() {
+            var canvas = document.getElementById("canvas");
+            if (canvas.getContext) {
+                var ctx = canvas.getContext("2d");
+                // ctx.fillRect(25, 25, 100, 100);
+                // ctx.clearRect(35, 35, 80, 80);
+                // ctx.strokeRect(50, 50, 50, 50);
+                // ctx.fillStyle = 'red'
+                // ctx.beginPath();
+                // ctx.moveTo(75, 50);
+                // ctx.lineTo(100, 75);
+                // ctx.lineTo(100, 25);
+                // ctx.fill();
+                // ctx.beginPath();
+                // ctx.arc(75, 75, 50, 0, Math.PI * 2, true); // 绘制
+                // ctx.moveTo(110, 75);
+                // ctx.arc(75, 75, 35, 0, Math.PI, false); // 口(顺时针)
+                // ctx.moveTo(65, 65);
+                // ctx.arc(60, 65, 5, 0, Math.PI * 2, true); // 左眼
+                // ctx.moveTo(95, 65);
+                // ctx.arc(90, 65, 5, 0, Math.PI * 2, true); // 右眼
+                // ctx.stroke();
+                // // 填充三角形
+                // ctx.beginPath();
+                // ctx.moveTo(25, 25);
+                // ctx.lineTo(105, 25);
+                // ctx.lineTo(25, 105);
+                // ctx.fill();
+
+                // // 描边三角形
+                // ctx.beginPath();
+                // ctx.moveTo(125, 125);
+                // ctx.lineTo(125, 45);
+                // ctx.lineTo(45, 125);
+                // ctx.closePath();
+                // ctx.stroke();
+
+                for (var i = 0; i < 4; i++) {
+                    for (var j = 0; j < 3; j++) {
+                        ctx.beginPath();
+                        var x = 25 + j * 50; // x 坐标值
+                        var y = 25 + i * 50; // y 坐标值
+                        var radius = 20; // 圆弧半径
+                        var startAngle = 0; // 开始点
+                        var endAngle = Math.PI + (Math.PI * j) / 2; // 结束点
+                        var anticlockwise = i % 2 == 0 ? false : true; // 顺时针或逆时针
+
+                        ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise);
+
+                        if (i > 1) {
+                            ctx.fill();
+                        } else {
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body onload="draw();">
+    <canvas id="canvas" width="150" height="150"></canvas>
+</body>
+
+</html>

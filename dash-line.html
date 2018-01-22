@@ -1,0 +1,37 @@
+<html>
+
+<head>
+    <script type="application/javascript">
+        function draw() {
+            var canvas = document.getElementById('canvas');
+            if (canvas.getContext) {
+                var ctx = document.getElementById('canvas').getContext('2d');
+                var offset = 0;
+
+                function draw() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    ctx.setLineDash([4, 2]);
+                    ctx.lineDashOffset = -offset;
+                    ctx.strokeRect(10, 10, 100, 100);
+                }
+
+                function march() {
+                    offset++;
+                    if (offset > 16) {
+                        offset = 0;
+                    }
+                    draw();
+                    setTimeout(march, 80)
+                }
+
+                march();
+            }
+        }
+    </script>
+</head>
+
+<body onload="draw();">
+    <canvas id="canvas" width="150" height="150"></canvas>
+</body>
+
+</html>
