@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <script src="./rgbaster.js"></script>
+    <script>
+        window.onload = function() {
+            var src = './3342.jpg'
+            var img = new Image
+            img.src = src
+            img.onload = function() {
+                //colorThief
+                // var colorThief = new ColorThief();
+                // colorThief.getColor(img);
+
+                //RGBaster
+                // RGBaster.colors(img, {
+                //     success: function(payload) {
+                //         // You now have the payload.
+                //         console.log(payload.dominant);
+                //         console.log(payload.secondary);
+                //         console.log(payload.palette);
+                //     }
+                // });
+                var canvas = document.createElement('canvas');
+                canvas.width = img.width;
+                canvas.height = img.height;
+                canvas.getContext('2d').drawImage(img, 0, 0, img.width, img.height);
+
+                dataURL = canvas.toDataURL('image/jpeg');
+
+            }
+
+        }
+    </script>
+</body>
+
+</html>
