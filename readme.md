@@ -5,7 +5,7 @@
 
 偷懒没有把所有代码都区分开分成文件.代码里的注释大部分都是一些小demo的演示
 
-### **2018-01-17**
+### 2018-01-17
 
 - [canvas入门准备][1]
     
@@ -17,7 +17,7 @@
 - [线型][6]
 - [save()和restore()][7] //看了一半
 
-### **2018-01-22**
+### 2018-01-22
 在MDN看了一遍教程
 > 接下来要学习动画！
 - [基本用法][8]
@@ -26,6 +26,10 @@
 - [绘制文本][11]
 - [使用图片][12]
 - [变形][13]
+
+### 2018-01-31
+- [合成与裁剪][14]
+- [基本动画][15]
 
 
 [0]:https://www.w3cplus.com/search/node/Canvas%E5%AD%A6%E4%B9%A0
@@ -43,7 +47,8 @@
 [11]:https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Drawing_text
 [12]:https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Using_images
 [13]:https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Transformations
-
+[14]:https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Compositing
+[15]:https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Basic_animations
 
 ------
 ### **加油学习**
