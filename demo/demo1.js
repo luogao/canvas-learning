@@ -8,10 +8,6 @@ const windowToCanvas = (canvas, x, y) => {
     }
 }
 
-const isMouseInCanvas = function(canvas, x, y) {
-
-}
-
 function draw(canvas) {
     let drawing = false
     let ctx = canvas.getContext('2d')
