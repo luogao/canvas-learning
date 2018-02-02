@@ -31,6 +31,9 @@
 - [合成与裁剪][14]
 - [基本动画][15]
 
+### 2018-02-02
+- 在sf上看到大佬做的 [前端系列——canvas实现按住鼠标移动绘制出轨迹][16] 于是效仿着做了一个一样的
+
 
 [0]:https://www.w3cplus.com/search/node/Canvas%E5%AD%A6%E4%B9%A0
 [1]:https://www.w3cplus.com/canvas/introduction-to-prepare.html
@@ -49,6 +52,7 @@
 [13]:https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Transformations
 [14]:https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Compositing
 [15]:https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Basic_animations
+[16]:https://segmentfault.com/a/1190000013091631
 
 ------
 ### **加油学习**
