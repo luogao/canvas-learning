@@ -1,6 +1,9 @@
 const windowToCanvas = (canvas, x, y) => {
     //获取canvas元素距离窗口的一些属性，MDN上有解释
+    //Element.getBoundingClientRect()方法返回元素的大小及其相对于视口的位置
+    //
     let rect = canvas.getBoundingClientRect()
+    
         //x和y参数分别传入的是鼠标距离窗口的坐标，然后减去canvas距离窗口左边和顶部的距离。
     return {
         x: x - rect.left * (canvas.width / rect.width),
