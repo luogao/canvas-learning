@@ -2,15 +2,11 @@ window.onload = function () {
     draw()
 }
 function draw() {
-    var img = new Image();
-    img.src = 'https://mdn.mozillademos.org/files/5397/rhino.jpg';
-    img.crossOrigin = "Anonymous"
+    var img = document.getElementById('img');
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext('2d')
-    img.onload = function () {
-        ctx.drawImage(img, 0, 0)
-        img.style.display = 'none';
-    }
+    ctx.drawImage(img, 0, 0)
+    img.style.display = 'none';
     var color = document.getElementById('color');
     function pick(event) {
         var x = event.layerX;
