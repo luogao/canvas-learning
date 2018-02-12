@@ -1,0 +1,54 @@
+<html>
+
+<head>
+    <style>
+        #canvas {
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas" width="400" height="400"></canvas>
+    <canvas id="zoom" width="300" height="227"></canvas>
+    <input type="checkbox" id="smoothbtn">
+    <img src="54903.jpg" id="img" alt="">
+    <script>
+        let img = document.getElementById('img')
+        window.onload = function () {
+            draw(img)
+        }
+
+        function draw(img) {
+            const canvas = document.getElementById('canvas')
+            const ctx = canvas.getContext('2d')
+            ctx.drawImage(img, 0, 0, canvas.width , canvas.height)
+            img.style.display = 'none'
+
+            let zoomctx = document.getElementById('zoom').getContext('2d');
+            let smoothbtn = document.getElementById('smoothbtn');
+            let toggleSmoothing = function (event) {
+                zoomctx.imageSmoothingEnabled = this.checked;
+                zoomctx.mozImageSmoothingEnabled = this.checked;
+                zoomctx.webkitImageSmoothingEnabled = this.checked;
+                zoomctx.msImageSmoothingEnabled = this.checked;
+            };
+            smoothbtn.addEventListener('change', toggleSmoothing);
+
+            let zoom = function (event) {
+                let x = event.layerX;
+                let y = event.layerY;
+                zoomctx.drawImage(canvas,
+                    Math.abs(x - 50),
+                    Math.abs(y - 50),
+                    10, 10,
+                    0, 0,
+                    200, 200);
+            };
+
+            canvas.addEventListener('mousemove', zoom);
+        }
+    </script>
+</body>
+
+</html>

@@ -20,7 +20,6 @@
 ### 2018-01-22
 在MDN看了一遍教程
 > 接下来要学习动画！
-
 - [基本用法][8]
 - [绘制形状][9]
 - [添加样式和颜色][10]
@@ -39,12 +38,6 @@
 继续学动画
 - [高级动画][17]
 
-### 2018-02-12
-- [像素操作][18]
-
-    - 暂时实现了颜色选择器，以及图片灰度和反相颜色
-
-
 [0]:https://www.w3cplus.com/search/node/Canvas%E5%AD%A6%E4%B9%A0
 [1]:https://www.w3cplus.com/canvas/introduction-to-prepare.html
 [2]:https://www.w3cplus.com/canvas/canvas-coordinate-system.html
@@ -53,6 +46,7 @@
 [5]:https://www.w3cplus.com/canvas/draw-dashed-and-dotted-lines.html
 [6]:https://www.w3cplus.com/canvas/canvas-line-style.html
 [7]:https://www.w3cplus.com/canvas/canvas-states.html
+
 [8]:https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Basic_usage
 [9]:https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes
 [10]:https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Applying_styles_and_colors
@@ -63,6 +57,6 @@
 [15]:https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Basic_animations
 [16]:https://segmentfault.com/a/1190000013091631
 [17]:https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Advanced_animations
-[18]:https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Pixel_manipulation_with_canvas
+
 ------
 ### **加油学习**
