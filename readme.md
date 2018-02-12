@@ -38,6 +38,12 @@
 继续学动画
 - [高级动画][17]
 
+### 2018-02-12
+继续学动画
+- [像素操作][17]
+    - 暂时实现了颜色选择器，以及图片灰度和反相颜色
+
+
 [0]:https://www.w3cplus.com/search/node/Canvas%E5%AD%A6%E4%B9%A0
 [1]:https://www.w3cplus.com/canvas/introduction-to-prepare.html
 [2]:https://www.w3cplus.com/canvas/canvas-coordinate-system.html
@@ -57,6 +63,6 @@
 [15]:https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Basic_animations
 [16]:https://segmentfault.com/a/1190000013091631
 [17]:https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Advanced_animations
-
+[18]:https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Pixel_manipulation_with_canvas
 ------
 ### **加油学习**
