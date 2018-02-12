@@ -20,6 +20,7 @@
 ### 2018-01-22
 在MDN看了一遍教程
 > 接下来要学习动画！
+
 - [基本用法][8]
 - [绘制形状][9]
 - [添加样式和颜色][10]
@@ -52,7 +53,6 @@
 [5]:https://www.w3cplus.com/canvas/draw-dashed-and-dotted-lines.html
 [6]:https://www.w3cplus.com/canvas/canvas-line-style.html
 [7]:https://www.w3cplus.com/canvas/canvas-states.html
-
 [8]:https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Basic_usage
 [9]:https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes
 [10]:https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Applying_styles_and_colors
