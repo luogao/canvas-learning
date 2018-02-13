@@ -41,6 +41,11 @@
 ### 2018-02-12
 - [像素操作][18]
 
+### 2018-02-13
+- [点击区域和无障碍访问][19]
+
+
+
 [0]:https://www.w3cplus.com/search/node/Canvas%E5%AD%A6%E4%B9%A0
 [1]:https://www.w3cplus.com/canvas/introduction-to-prepare.html
 [2]:https://www.w3cplus.com/canvas/canvas-coordinate-system.html
@@ -61,6 +66,7 @@
 [16]:https://segmentfault.com/a/1190000013091631
 [17]:https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Advanced_animations
 [18]:https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Pixel_manipulation_with_canvas
+[19]:https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Hit_regions_and_accessibility
 
 
 ------
