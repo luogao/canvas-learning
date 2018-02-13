@@ -1,0 +1,31 @@
+<html>
+
+<head>
+    <style>
+        #canvas {
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas" width="400" height="400"></canvas>
+
+    <script>
+        let canvas = document.getElementById('canvas')
+        let ctx = canvas.getContext('2d')
+        ctx.beginPath()
+        ctx.arc(70, 80, 10, 0, 2 * Math.PI, false)
+        ctx.fill();
+        ctx.addHitRegion({
+            id: "circle"
+        });
+        canvas.addEventListener("mousemove", function (event) {
+            if (event.region) {
+                alert("hit region: " + event.region);
+            }
+        });
+    </script>
+</body>
+
+</html>
