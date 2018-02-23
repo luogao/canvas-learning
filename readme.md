@@ -44,6 +44,11 @@
 ### 2018-02-13
 - [点击区域和无障碍访问][19]
 
+### 2018-02-23
+- 在sf上看到大佬做的[《每周一点canvas动画》—— 文字粒子][20]遂照着敲了一遍，膜拜[之][21]
+
+
+
 
 
 [0]:https://www.w3cplus.com/search/node/Canvas%E5%AD%A6%E4%B9%A0
@@ -67,6 +72,9 @@
 [17]:https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Advanced_animations
 [18]:https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Pixel_manipulation_with_canvas
 [19]:https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Hit_regions_and_accessibility
+[20]:https://segmentfault.com/a/1190000005704935
+[21]:https://segmentfault.com/u/worengjiuzaizheli
+
 
 
 ------
