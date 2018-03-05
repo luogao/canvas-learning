@@ -18,12 +18,15 @@ function draw() {
     let img = document.getElementById('img');
     let canvas = document.getElementById('canvas');
     let ctx = canvas.getContext('2d')
+    ctx.fillStyle = 'rgba(0,0,0,.5)'
+    ctx.drawImage(img, 0, 0)
     ctx.fillRect(0, 0, canvas.width, canvas.height)
     img.style.display = 'none';
     canvas.addEventListener('mousemove', function(e) {
         ctx.clearRect(0, 0, canvas.width, canvas.height)
-        
-        ctx.fillStyle = 'black'
+
+        ctx.fillStyle = 'rgba(0,0,0,.5)'
+        ctx.drawImage(img, 0, 0)
         ctx.fillRect(0, 0, canvas.width, canvas.height)
         ctx.save();
         let position = windowToCanvas(canvas, e.clientX, e.clientY)
