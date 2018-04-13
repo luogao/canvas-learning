@@ -1,4 +1,5 @@
 var self = this
+
 $(document).ready(function() {
     var canvas = document.createElement('canvas'),
         canvasCircleArr
@@ -13,6 +14,7 @@ $(document).ready(function() {
         loadCanvas(value)
     })
 })
+
 function Bubble(option) {
     this.width = self.window.innerWidth
     this.height = self.window.innerHeight / 2
@@ -21,6 +23,7 @@ function Bubble(option) {
     this.x = option.x || 0
     this.y = option.y || 0
 }
+
 Bubble.prototype.draw = function(ctx, randomMove) {
     var x, y
     x = this.x * 3 + 50,
@@ -44,6 +47,7 @@ function loadCanvas(value) {
     ctx.fillText(value, 0, fontSize / 5 * 4) //轻微调整绘制字符位置
     getImage(canvas, ctx) //导出为图片再导入到canvas获取图像数据
 }
+
 function getImage(canvas, ctx) {
     var image = new Image()
     image.src = canvas.toDataURL("image/jpeg")
@@ -77,7 +81,7 @@ function getImage(canvas, ctx) {
                     }
                     var newBubble = new Bubble(option)
                     newBubble.draw(newCtx)
-                } 
+                }
             }
         }
         // document.getElementById('body').appendChild(canvas) //离屏canvas展现到界面中看到渲染效果
