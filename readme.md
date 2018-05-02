@@ -50,6 +50,15 @@
 ### 2018-03-05
 - 更新自己实现的一个效果 —— 鼠标移动到画布上显示遮罩后面的图片的部分
 
+### 2018-05-02
+- 补更新：利用chrome人脸识别API实现一个简单的视频人脸识别demo。[demo][23]
+  - 参考[前端人脸检测指南][22]
+
+- 今日更新: canvas 粒子效果 实现自由滚动 接近连线功能。[demo][27]
+  - 参考[炒鸡简单的canvas粒子][24]
+  - 参考[canvas 会动的粒子效果][25]
+  - 参考[JS HEX十六进制与RGB, HSL颜色的相互转换][24]
+
 
 
 
@@ -77,8 +86,12 @@
 [19]:https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Hit_regions_and_accessibility
 [20]:https://segmentfault.com/a/1190000005704935
 [21]:https://segmentfault.com/u/worengjiuzaizheli
-
-
+[22]:https://juejin.im/post/5adff2c76fb9a07aa43bdded
+[23]:https://www.lglzy.cn/face-detection-demo/
+[24]:https://juejin.im/post/5ae05ef6518825670e5cbcde?utm_medium=fe&utm_source=weixinqun
+[25]:https://juejin.im/entry/58d3759b5c497d0057e2df23
+[26]:http://www.zhangxinxu.com/wordpress/2010/03/javascript-hex-rgb-hsl-color-convert/
+[27]:https://www.lglzy.cn/dot-demo/
 
 ------
 ### **加油学习**
