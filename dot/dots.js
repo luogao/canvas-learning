@@ -7,9 +7,7 @@ class Dots {
     this.canvas = canvas
     this.ctx = canvas.getContext('2d')
     this.init()
-    setInterval(() => {
-      this.anim()
-    }, 1000 / 60)
+    this.anim(this)
   }
 
   init() {
@@ -25,15 +23,19 @@ class Dots {
     }
   }
 
-  anim() {
-    const self = this
-    self.ctx.clearRect(0, 0, self.canvas.width, self.canvas.height);
-    for (let i = 0; i < self.dots.length; i++) {
-      self.dots[i].update()
-      for (let j = i + 1; j < self.dots.length; j++) {
-        self.dots[i].drawLine(self.dots[j])
+  anim(context) {
+    const self = context
+    self.anim = function () {
+      self.ctx.clearRect(0, 0, self.canvas.width, self.canvas.height);
+      for (let i = 0; i < self.dots.length; i++) {
+        self.dots[i].update()
+        for (let j = i + 1; j < self.dots.length; j++) {
+          self.dots[i].drawLine(self.dots[j])
+        }
       }
+      requestAnimationFrame(self.anim)
     }
+    return self.anim()
   }
 
 }
