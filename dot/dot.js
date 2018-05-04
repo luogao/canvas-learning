@@ -42,14 +42,14 @@ class Dot {
     const dx = x - x1
     const dy = y - y1
     const distance = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2))
-    if (distance < 100) {
+    if (distance < 150) {
       const alpha = (100 - distance) / 100 * 1
       ctx.save()
       ctx.beginPath()
       ctx.strokeStyle = hex2rgba(lineColor, alpha)
-      ctx.strokeWidth = 1
-      ctx.moveTo(x, y)
-      ctx.lineTo(x1, y1)
+      ctx.strokeWidth = .5
+      ctx.moveTo(x + .5, y + .5)
+      ctx.lineTo(x1 + .5, y1 + .5)
       ctx.closePath()
       ctx.stroke()
       ctx.restore()
