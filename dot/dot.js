@@ -2,7 +2,7 @@ import { hex2rgba } from '../utils'
 
 class Dot {
   constructor(x, y, vx, vy, canvas) {
-    this.time = .5
+    this.time = 1
     this.x = x
     this.y = y
     this.vx = vx
