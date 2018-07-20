@@ -1,0 +1,11 @@
+{
+  "name": "water-wave",
+  "version": "1.0.0",
+  "description": "A canvas learning demo",
+  "author": "Roy Luo",
+  "private": false,
+  "scripts": {
+    "test": "npm run unit",
+    "start": "parcel index.html"
+  }
+}
