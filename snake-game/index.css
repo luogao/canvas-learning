@@ -1,0 +1,23 @@
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  height: 100%;
+}
+.game-tip{
+  overflow: hidden;
+}
+
+.welcome {
+  margin-top: 3em;
+  text-align: center;
+}
+
+.game-container {
+  display: flex;
+  margin-top: 5em;
+  align-items: center;
+  justify-content: center;
+}

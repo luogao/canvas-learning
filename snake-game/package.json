@@ -1,0 +1,11 @@
+{
+  "name": "snake-game",
+  "version": "1.0.0",
+  "description": "A normal project",
+  "author": "Roy Luo",
+  "private": false,
+  "scripts": {
+    "test": "npm run unit",
+    "start": "parcel index.html"
+  }
+}
