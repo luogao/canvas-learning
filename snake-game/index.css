@@ -6,12 +6,17 @@ body {
   margin: 0;
   height: 100%;
 }
-.game-tip{
+
+.game-tip {
   overflow: hidden;
 }
 
 .welcome {
   margin-top: 3em;
+  text-align: center;
+}
+
+#score {
   text-align: center;
 }
 
