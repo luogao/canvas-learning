@@ -22,6 +22,14 @@ let foodX = 0
 let foodY = 0
 let score = 0
 
+let _snake = [
+  { x: 150, y: 150 },
+  { x: 140, y: 150 },
+  { x: 130, y: 150 },
+  { x: 120, y: 150 },
+  { x: 110, y: 150 }
+]
+
 let snake = [
   { x: 150, y: 150 },
   { x: 140, y: 150 },
@@ -122,16 +130,16 @@ const drawSnakePart = function (snakePark) {
   ctx.strokeRect(x, y, 10, 10)
 }
 const drawSnake = function () {
-
   snake.forEach(drawSnakePart)
 }
 
+let timer = null
 const start = function () {
   if (didGameEnd()) {
     document.querySelector('.welcome').innerHTML = 'Game Over'
     return
   }
-  setTimeout(() => {
+  timer = setTimeout(() => {
     changingDirection = false
     initCanvas()
     drawFood()
@@ -143,5 +151,8 @@ const start = function () {
 }
 
 document.addEventListener('keydown', changeDirection)
+document.getElementById('restart').addEventListener('click', () => {
+  console.log('restart')
+}, false)
 createFood()
 start()

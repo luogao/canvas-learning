@@ -20,9 +20,13 @@ body {
   text-align: center;
 }
 
+#restart{
+  margin-top: 3em;
+}
 .game-container {
   display: flex;
   margin-top: 5em;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
