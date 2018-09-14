@@ -12,7 +12,6 @@ body {
 }
 
 .welcome {
-  margin-top: 3em;
   text-align: center;
 }
 
@@ -20,13 +19,62 @@ body {
   text-align: center;
 }
 
-#restart{
-  margin-top: 3em;
-}
 .game-container {
   display: flex;
-  margin-top: 5em;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+}
+
+.game-control-container {
+  margin-top: 1.5em;
+  display: grid;
+  justify-content: center;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.game-control-container button {
+  width: 6em;
+  height: 6em;
+  border: none;
+  background: #ccc;
+  color: #fff;
+  outline: none;
+  margin: 1em;
+  user-select: none;
+}
+
+.up {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.down {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.left {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.right {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+#restart {
+  background: pink;
+  color: black;
+  grid-column: 3;
+  grid-row: 1;
+}
+.none{
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.game-control-container button:active {
+  opacity: .8;
 }

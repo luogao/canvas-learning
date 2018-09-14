@@ -12,6 +12,8 @@ const UP_KEY = 38
 const DOWN_KEY = 40
 
 const gameCavans = document.getElementById('gameCanvas')
+const controlBtns = document.querySelector('.game-control-container')
+
 const W = gameCavans.width
 const H = gameCavans.height
 const ctx = gameCavans.getContext('2d')
@@ -150,9 +152,21 @@ const start = function () {
 
 }
 
+controlBtns.addEventListener('click', (e) => {
+  if (e.target.dataset.keyCode) {
+    const event = {
+      keyCode: parseInt(e.target.dataset.keyCode, 10)
+    }
+    changeDirection(event)
+  }
+  e.preventDefault()
+})
+
+document.body.addEventListener('touchstart', function () { });
 document.addEventListener('keydown', changeDirection)
 document.getElementById('restart').addEventListener('click', () => {
   console.log('restart')
+  window.location.reload()
 }, false)
 createFood()
 start()

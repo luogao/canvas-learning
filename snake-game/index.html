@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Snake Game Demo</title>
 </head>
@@ -15,7 +15,15 @@
   </div>
   <div class="game-container">
     <canvas id="gameCanvas" width="300" height="300"></canvas>
+  </div>
+
+  <div class="game-control-container">
+    <button class="none">null</button>
     <button id="restart">restart</button>
+    <button class="up" data-key-code="38">⬆️</button>
+    <button class="down" data-key-code="40">⬇️</button>
+    <button class="left" data-key-code="37">⬅️</button>
+    <button class="right" data-key-code="39">➡️</button>
   </div>
   <script src="./index.js"></script>
 </body>
