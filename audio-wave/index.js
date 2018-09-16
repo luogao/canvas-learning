@@ -99,7 +99,7 @@ const draw = () => {
 
 const draw2 = () => {
   // 获取当前频域数据；将当前频域数据拷贝进Uint8Array数组（无符号字节数组）
-  analyser.getByteFrequencyData(dataArray)
+  analyser.getByteTimeDomainData(dataArray)
   ctx.clearRect(0, 0, W, H)
   ctx.fillStyle = 'rgb(0,0,0)'
   ctx.fillRect(0, 0, W, H)
