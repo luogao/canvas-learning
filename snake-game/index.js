@@ -1,21 +1,12 @@
 import './index.css'
-
-const CANVAS_BACKGROUND_COLOR = '#fff'
-const CANVAS_BORDER_COLOUR = '#000'
-const SNAKE_BODY_COLOR = 'lightgreen'
-const SNAKE_BODY_LINE_COLOR = 'darkgreen'
-const FOOD_COLOR = 'red'
-const FOOD_BORDER_COLOR = 'darkred'
-const LEFT_KEY = 37
-const RIGHT_KEY = 39
-const UP_KEY = 38
-const DOWN_KEY = 40
+import { CANVAS_BACKGROUND_COLOR, CANVAS_BORDER_COLOUR, SNAKE_BODY_COLOR, SNAKE_BODY_LINE_COLOR, FOOD_COLOR, FOOD_BORDER_COLOR, LEFT_KEY, RIGHT_KEY, UP_KEY, DOWN_KEY,GAME_SPEED } from './constants'
 
 const gameCavans = document.getElementById('gameCanvas')
 const controlBtns = document.querySelector('.game-control-container')
 
 const W = gameCavans.width
 const H = gameCavans.height
+
 const ctx = gameCavans.getContext('2d')
 let dx = 10
 let dy = 0
@@ -23,14 +14,6 @@ let changingDirection = false
 let foodX = 0
 let foodY = 0
 let score = 0
-
-let _snake = [
-  { x: 150, y: 150 },
-  { x: 140, y: 150 },
-  { x: 130, y: 150 },
-  { x: 120, y: 150 },
-  { x: 110, y: 150 }
-]
 
 let snake = [
   { x: 150, y: 150 },
@@ -148,7 +131,7 @@ const start = function () {
     advanceSnake(snake)
     drawSnake()
     start()
-  }, 100)
+  }, GAME_SPEED)
 
 }
 
