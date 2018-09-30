@@ -54,6 +54,7 @@ class Pie {
     tipEl.style.position = 'absolute'
     tipEl.style.zIndex = '999'
     tipEl.style.display = 'none'
+    tipEl.style.boxShadow = '0 2px 10px rgba(0,0,0,.3)'
 
     document.body.appendChild(tipEl)
 
