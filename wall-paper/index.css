@@ -1,0 +1,24 @@
+html {
+  height: 100%;
+}
+body {
+  margin: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.welcome {
+  font-weight: 100;
+  font-size: 6em;
+  color: #525252;
+  font-family: 'Gaegu', cursive;
+}
+
+#wall-paper{
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+  opacity: 0;
+  z-index: 0;
+}
