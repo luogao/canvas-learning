@@ -47,12 +47,8 @@ function getDotPosition(text) {
   return points;
 }
 
-function init(points) {
-  const len = points.length;
-  if (dots.length) {
-    dots.length = 0;
-  }
-  for (let i = 0; i < len; i++) {
+function init(maxLength) {
+  for (let i = 0; i < maxLength; i++) {
     const dot = new Dot({
       x: (startPosition - (Math.random() * startPosition) / 2 + W) / 2,
       y: (startPosition - (Math.random() * startPosition) / 2 + H) / 2,
@@ -65,24 +61,32 @@ function init(points) {
 }
 
 function step(nextPoints) {
-  dots.forEach((dot, i) => {
+  const _dot = dots.slice(0, nextPoints.length);
+  const _restDot = dots.slice(nextPoints.length);
+  _restDot.forEach(dot => {
+    dot.hide();
+  });
+  _dot.forEach((dot, i) => {
+    if (dot.isHidden) {
+      dot.show();
+    }
     dot.changePotison(nextPoints[i].x, nextPoints[i].y);
   });
 }
 
 function draw() {
-  init(points1);
   setTimeout(() => {
+    console.log(1);
     step(points1);
   }, 1000);
   setTimeout(() => {
-    init(points2);
+    console.log(2);
     step(points2);
-  }, 5000);
+  }, 3000);
   setTimeout(() => {
-    init(points3);
+    console.log(3);
     step(points3);
-  }, 7000);
+  }, 6000);
 }
 
 function update(dot) {
@@ -95,9 +99,10 @@ function animate() {
   dots.forEach(update);
   requestAnimationFrame(animate);
 }
-const points1 = getDotPosition("老婆");
-const points2 = getDotPosition("下午好");
-const points3 = getDotPosition("工作辛苦啦");
-
+const points1 = getDotPosition("safsdf");
+const points2 = getDotPosition("B");
+const points3 = getDotPosition("C");
+const maxLength = Math.max(points1.length, points2.length, points3.length);
+init(maxLength);
 draw();
 animate();

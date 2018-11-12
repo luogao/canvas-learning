@@ -1,11 +1,11 @@
 export const createCanvas = (width = 300, height = 300, id) => {
-  const canvas = document.createElement('canvas')
-  canvas.width = width
-  canvas.height = height
-  id && (canvas.id = id)
-  document.body.appendChild(canvas)
-  return canvas
-}
+  const canvas = document.createElement("canvas");
+  canvas.width = width;
+  canvas.height = height;
+  id && (canvas.id = id);
+  document.body.appendChild(canvas);
+  return canvas;
+};
 
 export const hex2rgba = (color, alpha) => {
   let sColor = color.toLowerCase();
@@ -25,7 +25,9 @@ export const hex2rgba = (color, alpha) => {
     for (let i = 1; i < 7; i += 2) {
       sColorChange.push(parseInt("0x" + sColor.slice(i, i + 2)));
     }
-    return `rgba( ${sColorChange.join(",")},${alpha} )`
+    return `rgba( ${sColorChange.join(",")},${alpha} )`;
   }
   return sColor;
-}
+};
+
+export const randomItem = arr => arr[Math.floor(Math.random() * arr.length)];
