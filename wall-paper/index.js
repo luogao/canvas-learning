@@ -32,5 +32,5 @@ ctx.fillText(text, (W + letterSpacing) / 2, H / 2)
 
 ctx.restore()
 
-const imgSrc = canvas.toDataURL('image/png')
-imgToShow.src = imgSrc
+// const imgSrc = canvas.toDataURL('image/png')
+// imgToShow.src = imgSrc

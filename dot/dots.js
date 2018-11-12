@@ -13,7 +13,7 @@ class Dots {
 
   init() {
     const { num, canvas, dots, ctx } = this
-    for (let i = 0; i < this.num; i++) {
+    for (let i = 0; i < num; i++) {
       let x = Math.ceil(Math.random() * canvas.width)
       let y = Math.ceil(Math.random() * canvas.height)
       let vx = Math.random() * 2 - 1
