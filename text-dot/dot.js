@@ -7,6 +7,7 @@ const FRICTION = 0.9;
 
 class Dot {
   constructor({ x, y, canvas, size }) {
+    this.isHidden = false;
     this.time = 0.6;
     this.rangeX = _range + x;
     this.rangeY = _range + y;
@@ -41,10 +42,6 @@ class Dot {
   }
 
   hide() {
-    this.bgColor = "rgba(0,0,0,0)";
-    this.size = 0;
-    this.x = this.x0;
-    this.y = this.y0;
     this.isHidden = true;
   }
 
@@ -66,19 +63,18 @@ class Dot {
 
       this.x += this.vx;
       this.y += this.vy;
+      if (this.x === this.nextX) {
+        console.log(this.x === this.nextX);
+      }
     }
   }
 
   update() {
-    const { ctx, x0, y0, size } = this;
-    // this.x = this.x + this.vx * this.time;
-    // this.y = this.y + this.vy * this.time;
-    // this.vx =
-    //   ((_range - size) * 2 - Math.floor(Math.random() * (_range - size))) / 10;
-    // this.vy =
-    //   ((_range - size) * 2 - Math.floor(Math.random() * (_range - size))) / 10;
-    // this.vx = this.x - x0 < _range ? this.vx : -this.vx;
-    // this.vy = this.y - y0 < _range ? this.vy : -this.vy;
+    const { ctx } = this;
+    if (this.isHidden) {
+      this.bgColor = `rgba(0,0,0,0)`;
+      this.changePotison(this.canvas.width / 2, this.canvas.height / 2);
+    }
     this.size = this.oldSize * Math.random();
     this.move();
     this.render(ctx);

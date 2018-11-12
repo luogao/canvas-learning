@@ -31,3 +31,14 @@ export const hex2rgba = (color, alpha) => {
 };
 
 export const randomItem = arr => arr[Math.floor(Math.random() * arr.length)];
+
+export function shuffle(arr) {
+  for (var i = arr.length - 1; i >= 0; i--) {
+    var randomIndex = Math.floor(Math.random() * (i + 1))
+    var itemAtIndex = arr[randomIndex]
+
+    arr[randomIndex] = arr[i]
+    arr[i] = itemAtIndex
+  }
+  return arr
+}

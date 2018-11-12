@@ -1,5 +1,6 @@
 import "./index.css";
 import Dot from "./dot";
+import { shuffle } from "../utils";
 
 const canvas = document.getElementById("canvas");
 const context = canvas.getContext("2d");
@@ -66,7 +67,7 @@ function step(nextPoints) {
   _restDot.forEach(dot => {
     dot.hide();
   });
-  _dot.forEach((dot, i) => {
+  shuffle(_dot).forEach((dot, i) => {
     if (dot.isHidden) {
       dot.show();
     }
@@ -99,7 +100,7 @@ function animate() {
   dots.forEach(update);
   requestAnimationFrame(animate);
 }
-const points1 = getDotPosition("safsdf");
+const points1 = getDotPosition("A");
 const points2 = getDotPosition("B");
 const points3 = getDotPosition("C");
 const maxLength = Math.max(points1.length, points2.length, points3.length);
