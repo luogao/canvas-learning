@@ -25,23 +25,6 @@ const loadingTrack = {
   color: "#ccc"
 };
 
-const drawLoadingBar = progress => {
-  circleLoadingContext.save();
-  circleLoadingContext.beginPath();
-  circleLoadingContext.lineWidth = loadingBar.width;
-  circleLoadingContext.strokeStyle = loadingBar.color;
-  circleLoadingContext.arc(
-    center.x,
-    center.y,
-    loading.size,
-    -Math.PI / 2,
-    Math.PI * progress,
-    false
-  );
-  circleLoadingContext.stroke();
-  circleLoadingContext.restore();
-};
-
 const c1 = new CircleLine({
   canvas: circleLoadingCanvas,
   ctx: circleLoadingContext,
@@ -68,17 +51,19 @@ const c2 = new CircleLine({
   clockwise: true,
   howLong: {
     total: 100,
-    length: 10
+    length: 90
   },
   animation: {
     duration: 1000,
+    before() {
+      c1.render();
+    },
     end() {
       console.log("animation finished!");
     }
   }
 });
 
-c1.render();
-c2.render();
-
-// drawLoadingBar(1);
+setTimeout(() => {
+  c2.render();
+}, 1000);

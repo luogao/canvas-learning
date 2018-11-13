@@ -43,6 +43,7 @@ class CircleLine {
       this._animate();
     } else {
       this._draw();
+      this.isAnimating = false;
     }
   }
 
@@ -51,13 +52,13 @@ class CircleLine {
     this._endAngle = this.startAngle + this.rad * this.step;
     this.step += this.speed;
     clearCanvas(this.canvas, this.ctx);
+    typeof this.animation.before === "function" && this.animation.before();
     this._draw(this._endAngle);
     if (this.step <= this.howLong.length) {
       this.timer = requestAnimationFrame(this._animate.bind(this));
     } else {
       console.timeEnd("animation time");
       cancelAnimationFrame(this.timer);
-      clearCanvas(this.canvas, this.ctx);
       this._draw();
       this.isAnimating = false;
       typeof this.animation.end === "function" && this.animation.end();
@@ -78,10 +79,6 @@ class CircleLine {
   }
 }
 
-const clearCanvas = (canvas, ctx) => {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-};
-
 const drawCircleLine = ({
   ctx,
   center = { x: 0, y: 0 },
@@ -101,4 +98,10 @@ const drawCircleLine = ({
   ctx.restore();
 };
 
+const clearCanvas = (canvas, ctx) => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+};
+
+
 export default CircleLine;
+
