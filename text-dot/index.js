@@ -4,15 +4,13 @@ import { shuffle } from "../utils";
 
 const canvas = document.getElementById("canvas");
 const context = canvas.getContext("2d");
-const W = (canvas.width = window.innerWidth);
-const H = (canvas.height = window.innerHeight);
+const W = (canvas.width = window.innerWidth / 2);
+const H = (canvas.height = window.innerHeight / 2);
 const dots = [];
-const number = 10;
-const text = "测试";
 const lineHeight = 7;
-const gridY = 10;
-const gridX = 10;
-const startPosition = 100;
+const gridY = 2;
+const gridX = 2;
+const raduis = 5;
 
 function getDotPosition(text) {
   const width = W;
@@ -30,6 +28,7 @@ function getDotPosition(text) {
     (height * size * 10) / lineHeight,
     (width * size * 10) / measure.width
   );
+
   offscreenCanvasCtx.font = `bold ${fSize}px Arial`;
   const measureResize = offscreenCanvasCtx.measureText(text);
   let left = (width - measureResize.width) / 2;
@@ -45,16 +44,18 @@ function getDotPosition(text) {
       }
     }
   }
+
   return points;
 }
 
 function init(maxLength) {
   for (let i = 0; i < maxLength; i++) {
     const dot = new Dot({
-      x: (startPosition - (Math.random() * startPosition) / 2 + W) / 2,
-      y: (startPosition - (Math.random() * startPosition) / 2 + H) / 2,
+      x: Math.ceil(Math.random() * canvas.width),
+      y: Math.ceil(Math.random() * canvas.height),
       canvas,
-      size: Math.floor(Math.random() * 10)
+      size: Math.floor(Math.random() * raduis),
+      color: "#000"
     });
     dots.push(dot);
     dot.render(context);
@@ -64,6 +65,8 @@ function init(maxLength) {
 function step(nextPoints) {
   const _dot = dots.slice(0, nextPoints.length);
   const _restDot = dots.slice(nextPoints.length);
+  // const _dot = dots.slice(0, 10);
+  // const _restDot = dots.slice(10);
   _restDot.forEach(dot => {
     dot.hide();
   });
@@ -79,7 +82,7 @@ function draw() {
   setTimeout(() => {
     console.log(1);
     step(points1);
-  }, 1000);
+  }, 0);
   setTimeout(() => {
     console.log(2);
     step(points2);
@@ -88,6 +91,10 @@ function draw() {
     console.log(3);
     step(points3);
   }, 6000);
+  setTimeout(() => {
+    console.log(4);
+    step(points4);
+  }, 9000);
 }
 
 function update(dot) {
@@ -100,10 +107,11 @@ function animate() {
   dots.forEach(update);
   requestAnimationFrame(animate);
 }
-const points1 = getDotPosition("A");
-const points2 = getDotPosition("B");
-const points3 = getDotPosition("C");
+const points1 = getDotPosition("That's All");
+const points2 = getDotPosition("Good Bye");
+const points3 = getDotPosition("I Love You");
+const points4 = getDotPosition("Thanks");
 const maxLength = Math.max(points1.length, points2.length, points3.length);
 init(maxLength);
-draw();
+setTimeout(draw, 1000);
 animate();

@@ -34,11 +34,21 @@ export const randomItem = arr => arr[Math.floor(Math.random() * arr.length)];
 
 export function shuffle(arr) {
   for (var i = arr.length - 1; i >= 0; i--) {
-    var randomIndex = Math.floor(Math.random() * (i + 1))
-    var itemAtIndex = arr[randomIndex]
+    var randomIndex = Math.floor(Math.random() * (i + 1));
+    var itemAtIndex = arr[randomIndex];
 
-    arr[randomIndex] = arr[i]
-    arr[i] = itemAtIndex
+    arr[randomIndex] = arr[i];
+    arr[i] = itemAtIndex;
   }
-  return arr
+  return arr;
 }
+
+export const randomNum = (min = 0, max, floor = true) => {
+  if (max) {
+    return floor
+      ? Math.random() * (max - min) + min
+      : Math.floor(Math.random() * (max - min) + min);
+  } else {
+    return 0;
+  }
+};

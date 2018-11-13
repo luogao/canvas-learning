@@ -1,12 +1,12 @@
-import { hex2rgba, randomItem } from "../utils";
+import { hex2rgba, randomItem, randomNum } from "../utils";
 import { dotColors } from "./constants";
 
 const _range = 11;
-const SPRING = 0.01;
-const FRICTION = 0.9;
+const SPRING = 2;
+const FRICTION = 0.1;
 
 class Dot {
-  constructor({ x, y, canvas, size }) {
+  constructor({ x, y, canvas, size, color }) {
     this.isHidden = false;
     this.time = 0.6;
     this.rangeX = _range + x;
@@ -18,10 +18,14 @@ class Dot {
     this.oldSize = size;
     this.vx = 0;
     this.vy = 0;
-    this.bgColor = hex2rgba(randomItem(dotColors), Math.random());
+    this.vs = 0;
+    this.bgColor =
+      hex2rgba(color, Math.random()) ||
+      hex2rgba(randomItem(dotColors), Math.random());
     this.size = size || Math.ceil(Math.random() * 3 + 1);
     this.canvas = canvas;
     this.ctx = {};
+    this.animateStoped = true;
   }
 
   render(ctx) {
@@ -39,6 +43,7 @@ class Dot {
   changePotison(nextX, nextY) {
     this.nextX = nextX;
     this.nextY = nextY;
+    this.animateStoped = false;
   }
 
   hide() {
@@ -46,8 +51,6 @@ class Dot {
   }
 
   show() {
-    this.bgColor = hex2rgba(randomItem(dotColors), Math.random());
-    this.size = this.oldSize;
     this.isHidden = false;
   }
 
@@ -63,20 +66,40 @@ class Dot {
 
       this.x += this.vx;
       this.y += this.vy;
-      if (this.x === this.nextX) {
-        console.log(this.x === this.nextX);
+      if (Math.ceil(this.x) === this.nextX) {
+        this.animateStoped = true;
       }
     }
+  }
+
+  handleHidden() {
+    this.vs += SPRING;
+    this.vs *= FRICTION;
+    this.size -= this.vs;
+    if (this.size < 0) {
+      this.size = 0;
+    }
+    this.changePotison(
+      Math.ceil(Math.random() * canvas.width),
+      Math.ceil(Math.random() * canvas.height)
+    );
   }
 
   update() {
     const { ctx } = this;
     if (this.isHidden) {
-      this.bgColor = `rgba(0,0,0,0)`;
-      this.changePotison(this.canvas.width / 2, this.canvas.height / 2);
+      this.handleHidden();
+    } else {
+      this.vs += SPRING;
+      this.vs *= FRICTION;
+      this.size += this.vs;
+      if (this.size >= this.oldSize) {
+        this.size = this.oldSize;
+      }
     }
-    this.size = this.oldSize * Math.random();
-    this.move();
+    if (!this.animateStoped) {
+      this.move();
+    }
     this.render(ctx);
   }
 }
