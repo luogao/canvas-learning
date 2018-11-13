@@ -21,7 +21,7 @@ function getDotPosition(text) {
   offscreenCanvas.setAttribute("width", width);
   offscreenCanvas.setAttribute("height", height);
   offscreenCanvasCtx.fillStyle = "#000";
-  offscreenCanvasCtx.font = "bold 10px Arial";
+  offscreenCanvasCtx.font = "normal 10px Arial";
   const measure = offscreenCanvasCtx.measureText(text);
   const size = 0.8;
   const fSize = Math.min(
@@ -29,7 +29,7 @@ function getDotPosition(text) {
     (width * size * 10) / measure.width
   );
 
-  offscreenCanvasCtx.font = `bold ${fSize}px Arial`;
+  offscreenCanvasCtx.font = `normal ${fSize}px Arial`;
   const measureResize = offscreenCanvasCtx.measureText(text);
   let left = (width - measureResize.width) / 2;
   const bottom = (height + (fSize / 10) * lineHeight) / 2;
@@ -110,8 +110,13 @@ function animate() {
 const points1 = getDotPosition("That's All");
 const points2 = getDotPosition("Good Bye");
 const points3 = getDotPosition("I Love You");
-const points4 = getDotPosition("Thanks");
-const maxLength = Math.max(points1.length, points2.length, points3.length);
+const points4 = getDotPosition("But Thanks");
+const maxLength = Math.max(
+  points1.length,
+  points2.length,
+  points3.length,
+  points4.length
+);
 init(maxLength);
-setTimeout(draw, 1000);
+draw();
 animate();
