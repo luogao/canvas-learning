@@ -1,5 +1,5 @@
 import "./index.css";
-import CircleLine from "./circleLine";
+import GRender from "./GRender";
 
 const circleLoadingCanvas = document.getElementById("circle-loading");
 const circleLoadingContext = circleLoadingCanvas.getContext("2d");
@@ -25,45 +25,74 @@ const loadingTrack = {
   color: "#ccc"
 };
 
-const c1 = new CircleLine({
+const render = new GRender({
   canvas: circleLoadingCanvas,
   ctx: circleLoadingContext,
-  center,
-  radius: loading.size,
-  width: loadingTrack.width,
-  color: loadingTrack.color,
-  startAngle: -Math.PI / 2,
-  clockwise: true,
-  howLong: {
-    total: 100,
-    length: 100
-  }
-});
-
-const c2 = new CircleLine({
-  canvas: circleLoadingCanvas,
-  ctx: circleLoadingContext,
-  center,
-  radius: loading.size,
-  width: loadingBar.width,
-  color: loadingBar.color,
-  startAngle: -Math.PI / 2,
-  clockwise: true,
-  howLong: {
-    total: 100,
-    length: 90
-  },
-  animation: {
-    duration: 1000,
-    before() {
-      c1.render();
+  children: [
+    {
+      name: "loading-track",
+      type: "circle",
+      animation: false,
+      data: {
+        radius: loading.size,
+        center,
+        lineWidth: loadingTrack.width,
+        color: loadingTrack.color,
+        startAngle: -Math.PI / 2,
+        howLong: {
+          total: 100,
+          length: 100
+        }
+      }
     },
-    end() {
-      console.log("animation finished!");
+    {
+      name: "loading-bar",
+      type: "circle",
+      animation: {
+        duration: 1000,
+        end() {
+          console.log("animation finished!");
+        }
+      },
+      data: {
+        radius: loading.size,
+        center,
+        lineWidth: loadingBar.width,
+        color: loadingBar.color,
+        startAngle: -Math.PI / 2,
+        howLong: {
+          total: 1000,
+          length: 900
+        }
+      }
+    },
+    {
+      name: "test-loading-bar",
+      type: "circle",
+      animation: {
+        duration: 2000,
+        end() {
+          console.log("test-loading-bar animation finished!");
+        }
+      },
+      data: {
+        radius: 150,
+        center :{
+          x: 200,
+          y: 100
+        },
+        lineWidth: 2,
+        color: 'red',
+        startAngle: -Math.PI / 2,
+        howLong: {
+          total: 1000,
+          length: 900
+        }
+      }
     }
-  }
+  ]
 });
 
-setTimeout(() => {
-  c2.render();
-}, 1000);
+window.onload = function() {
+  render.draw();
+};
