@@ -1,13 +1,33 @@
 import "./index.css";
 import GRender from "./GRender";
+import { randomItem } from "../utils";
+const colors = [
+  "#f44336",
+  "#e91e63",
+  "#9c27b0",
+  "#673ab7",
+  "#3f51b5",
+  "#2196f3",
+  "#03a9f4",
+  "#00bcd4",
+  "#009688",
+  "#4CAF50",
+  "#8BC34A",
+  "#CDDC39",
+  "#FFEB3B",
+  "#FFC107",
+  "#FF9800",
+  "#FF5722"
+];
 
 const circleLoadingCanvas = document.getElementById("circle-loading");
 const circleLoadingContext = circleLoadingCanvas.getContext("2d");
+const actionAddBtn = document.getElementById("action-add-btn");
+const actionUpdateBtn = document.getElementById("action-update-btn");
 
 const W = (circleLoadingCanvas.width = window.innerWidth / 2);
 const H = (circleLoadingCanvas.height = window.innerHeight / 2);
 
-const loadingSpeed = 0.1;
 const center = { x: W / 2, y: H / 2 };
 
 const loading = {
@@ -17,7 +37,7 @@ const loading = {
 
 const loadingBar = {
   width: 10,
-  color: "#000"
+  color: "#FFC107"
 };
 
 const loadingTrack = {
@@ -76,13 +96,13 @@ const render = new GRender({
         }
       },
       data: {
-        radius: 150,
-        center :{
+        radius: 90,
+        center: {
           x: 200,
           y: 100
         },
         lineWidth: 2,
-        color: 'red',
+        color: "red",
         startAngle: -Math.PI / 2,
         howLong: {
           total: 1000,
@@ -93,6 +113,74 @@ const render = new GRender({
   ]
 });
 
+let count = 1;
+
+actionAddBtn.addEventListener(
+  "click",
+  function() {
+    count++;
+    render.setOption({
+      name: "loading-bar-" + count,
+      type: "circle",
+      data: {
+        radius: 10 + count * 3,
+        center: center,
+        lineWidth: 1,
+        color: randomItem(colors),
+        startAngle: -Math.PI / 2,
+        howLong: {
+          total: 100,
+          length: count
+        }
+      }
+    });
+  },
+  false
+);
+
+actionUpdateBtn.addEventListener(
+  "click",
+  function() {
+    render.setOption({
+      name: "test-loading-bar",
+      data: {
+        radius: 100,
+        center: center,
+        lineWidth: 10,
+        color: randomItem(colors),
+        startAngle: -Math.PI / 2,
+        howLong: {
+          total: 100,
+          length: 50
+        }
+      }
+    });
+  },
+  false
+);
+
+let loadingSpeed = 10;
+let start = 0;
+
+const loadingFn = () => {
+  if (start < 1000) {
+    render.setOption({
+      name: "loading-bar",
+      data: {
+        howLong: {
+          total: 1000,
+          length: start
+        }
+      }
+    });
+    start += loadingSpeed;
+  } else {
+    start = 0;
+  }
+  requestAnimationFrame(loadingFn);
+};
+
 window.onload = function() {
   render.draw();
+  loadingFn();
 };

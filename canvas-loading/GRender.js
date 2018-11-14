@@ -1,34 +1,19 @@
 import CircleLine from "./circleLine";
 
-
-// const c2 = new CircleLine({
-//   canvas: circleLoadingCanvas,
-//   ctx: circleLoadingContext,
-//   center,
-//   radius: loading.size,
-//   width: loadingBar.width,
-//   color: loadingBar.color,
-//   startAngle: -Math.PI / 2,
-//   clockwise: true,
-//   howLong: {
-//     total: 100,
-//     length: 90
-//   },
-//   animation: {
-//     duration: 1000,
-//     end() {
-//       console.log("animation finished!");
-//     }
-//   }
-// });
-
 class GRender {
   constructor({ canvas, ctx, children }) {
     this.canvas = canvas;
     this.ctx = ctx;
     this.children = children || [];
     this.childrenInstance = [];
-    this.timer = null;
+    this.datas = {};
+    this._initData();
+  }
+
+  _initData() {
+    this.children.forEach(child => {
+      this.datas[child.name] = this._processData(child);
+    });
     this._initChildren();
   }
 
@@ -36,16 +21,18 @@ class GRender {
     switch (options.type) {
       case "circle":
         const _data = options.data;
+        const rad = (Math.PI * 2) / _data.howLong.total;
         return {
-          canvas: this.canvas,
-          ctx: this.ctx,
-          center: _data.center,
-          radius: _data.radius,
-          width: _data.lineWidth,
-          color: _data.color,
-          startAngle: _data.startAngle,
-          howLong: _data.howLong,
-          animation: options.animation
+          name: options.name,
+          data: {
+            center: _data.center,
+            radius: _data.radius,
+            lineWidth: _data.lineWidth,
+            color: _data.color,
+            startAngle: _data.startAngle,
+            endAngle: _data.startAngle + rad * _data.howLong.length,
+            clockwise: true
+          }
         };
     }
   }
@@ -53,7 +40,12 @@ class GRender {
   _handleChildInstantiation(options) {
     switch (options.type) {
       case "circle":
-        return new CircleLine(this._processData(options));
+        return new CircleLine({
+          canvas: this.canvas,
+          ctx: this.ctx,
+          name: options.name,
+          animation: options.animation
+        });
     }
   }
 
@@ -61,38 +53,63 @@ class GRender {
     this.childrenInstance = this.children.map(child => {
       return this._handleChildInstantiation(child);
     });
-    console.log(this.childrenInstance);
-  }
-
-  clearCanvas() {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
 
   _update() {
-    this.clearCanvas();
+    this.clear();
     this.render();
   }
 
-  _isFinishedAnimation(instance) {
-    return !instance.isAnimating;
-  }
-
-  _animate() {
-    if (this.childrenInstance.every(this._isFinishedAnimation)) {
-      cancelAnimationFrame(this.timer);
-    } else {
-      this._update()
-      this.timer = requestAnimationFrame(this._animate.bind(this));
-    }
+  clear() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    // this.ctx.fillStyle = 'rgba(0,0,0,0.3)'
+    // this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
   }
 
   draw() {
-    this._animate()
+    this.render();
+  }
+
+  addChild(child) {
+    this.children.push(child);
+    this._initData();
+  }
+
+  updateChild(newData) {
+    const targetIndex = this.children.findIndex(
+      child => child.name === newData.name
+    );
+    const _target = this.children[targetIndex]
+    const updateData = {
+      ..._target.data,
+      ...newData.data
+    }
+    this.children[targetIndex].data = updateData
+    this._initData();
+  }
+
+  setOption(newOptions) {
+    if (this.datas[newOptions.name]) {
+      this.updateChild(newOptions);
+    } else {
+      this.addChild(newOptions);
+    }
+    this._update();
+
+    // const _data = this.datas[newOptions.name];
+    // const changeData = newOptions.data;
+    // const newData = { ..._data, ...changeData };
+    // this.datas[newOptions.name] = newData;
+    // this.draw();
   }
 
   render() {
+    this._renderChildren();
+  }
+
+  _renderChildren() {
     this.childrenInstance.forEach(child => {
-      child.render();
+      child.render({ ...this.datas[child.name].data });
     });
   }
 }
