@@ -20,8 +20,10 @@ class GRender {
   _processData(options) {
     switch (options.type) {
       case "circle":
+        const interval = 1000 / 60;
         const _data = options.data;
         const rad = (Math.PI * 2) / _data.howLong.total;
+        const duration = 2000;
         return {
           name: options.name,
           data: {
@@ -31,7 +33,8 @@ class GRender {
             color: _data.color,
             startAngle: _data.startAngle,
             endAngle: _data.startAngle + rad * _data.howLong.length,
-            clockwise: true
+            clockwise: true,
+            updateSpeed: _data.howLong.length / (duration / interval)
           }
         };
     }
@@ -70,41 +73,42 @@ class GRender {
     this.render();
   }
 
-  addChild(child) {
+  _addChild(child) {
     this.children.push(child);
     this._initData();
   }
 
-  updateChild(newData) {
+  _updateChild(newData) {
     const targetIndex = this.children.findIndex(
       child => child.name === newData.name
     );
-    const _target = this.children[targetIndex]
+    const _target = this.children[targetIndex];
     const updateData = {
       ..._target.data,
       ...newData.data
-    }
-    this.children[targetIndex].data = updateData
+    };
+    this.children[targetIndex].data = updateData;
     this._initData();
   }
 
   setOption(newOptions) {
     if (this.datas[newOptions.name]) {
-      this.updateChild(newOptions);
+      this._updateChild(newOptions);
     } else {
-      this.addChild(newOptions);
+      this._addChild(newOptions);
     }
     this._update();
-
-    // const _data = this.datas[newOptions.name];
-    // const changeData = newOptions.data;
-    // const newData = { ..._data, ...changeData };
-    // this.datas[newOptions.name] = newData;
-    // this.draw();
   }
 
   render() {
     this._renderChildren();
+    // this.animation();
+  }
+
+  animation() {
+    this.childrenInstance.forEach(child => {
+      console.log(child.data.updateSpeed);
+    });
   }
 
   _renderChildren() {
