@@ -1,5 +1,24 @@
 import CircleLine from "./circleLine";
 
+const getCircleData = options => {
+  const interval = 1000 / 60;
+  const _data = options.data;
+  const rad = (Math.PI * 2) / _data.howLong.total;
+  const duration = 2000;
+  return {
+    name: options.name,
+    data: {
+      center: _data.center,
+      radius: _data.radius,
+      lineWidth: _data.lineWidth,
+      color: _data.color,
+      startAngle: _data.startAngle,
+      endAngle: _data.startAngle + rad * _data.howLong.length,
+      clockwise: true,
+      updateSpeed: _data.howLong.length / (duration / interval)
+    }
+  };
+}
 class GRender {
   constructor({ canvas, ctx, children }) {
     this.canvas = canvas;
@@ -15,28 +34,14 @@ class GRender {
       this.datas[child.name] = this._processData(child);
     });
     this._initChildren();
+    console.log('this.children', this.children)
+    console.log('this.datas', this.datas)
   }
 
   _processData(options) {
     switch (options.type) {
       case "circle":
-        const interval = 1000 / 60;
-        const _data = options.data;
-        const rad = (Math.PI * 2) / _data.howLong.total;
-        const duration = 2000;
-        return {
-          name: options.name,
-          data: {
-            center: _data.center,
-            radius: _data.radius,
-            lineWidth: _data.lineWidth,
-            color: _data.color,
-            startAngle: _data.startAngle,
-            endAngle: _data.startAngle + rad * _data.howLong.length,
-            clockwise: true,
-            updateSpeed: _data.howLong.length / (duration / interval)
-          }
-        };
+        return getCircleData(options)
     }
   }
 
@@ -75,7 +80,8 @@ class GRender {
 
   _addChild(child) {
     this.children.push(child);
-    this._initData();
+    this.datas[child.name] = this._processData(child)
+    this.childrenInstance.push(this._handleChildInstantiation(child))
   }
 
   _updateChild(newData) {
@@ -83,12 +89,10 @@ class GRender {
       child => child.name === newData.name
     );
     const _target = this.children[targetIndex];
-    const updateData = {
-      ..._target.data,
-      ...newData.data
-    };
-    this.children[targetIndex].data = updateData;
-    this._initData();
+    // update this.children
+    _target.data = { ..._target.data, ...newData.data };
+    // update this.datas
+    this.datas[newData.name].data = { ...this.datas[newData.name].data, ...this._processData(_target).data };
   }
 
   setOption(newOptions) {
