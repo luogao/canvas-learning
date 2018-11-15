@@ -1,12 +1,11 @@
 import CircleLine from "./circleLine";
 
-const getCircleData = options => {
-  const interval = 1000 / 60;
+const getCircleData = (options, index) => {
   const _data = options.data;
   const rad = (Math.PI * 2) / _data.howLong.total;
-  const duration = 2000;
   return {
     name: options.name,
+    index: index,
     data: {
       center: _data.center,
       radius: _data.radius,
@@ -15,10 +14,25 @@ const getCircleData = options => {
       startAngle: _data.startAngle,
       endAngle: _data.startAngle + rad * _data.howLong.length,
       clockwise: true,
-      updateSpeed: _data.howLong.length / (duration / interval)
+      shadow: _data.shadow || DEFAULTSHADOW
     }
   };
-}
+};
+
+const DEFAULTSHADOW = {
+  x: 0,
+  y: 0,
+  blur: 0,
+  color: "rgba(0, 0, 0, 0)"
+};
+
+const HOVERSHADOW = {
+  x: 2,
+  y: 2,
+  blur: 10,
+  color: "rgba(0, 0, 0,.3)"
+};
+
 class GRender {
   constructor({ canvas, ctx, children }) {
     this.canvas = canvas;
@@ -26,32 +40,38 @@ class GRender {
     this.children = children || [];
     this.childrenInstance = [];
     this.datas = {};
+    this.childrenInitData = {};
     this._initData();
   }
 
-  _initData() {
-    this.children.forEach(child => {
-      this.datas[child.name] = this._processData(child);
-    });
-    this._initChildren();
-    console.log('this.children', this.children)
-    console.log('this.datas', this.datas)
+  _getNewData(child, index) {
+    this.datas[child.name] = this._processData(child, index);
+    this.childrenInitData[child.name] = this._processData(child, index);
   }
 
-  _processData(options) {
+  _initData() {
+    this.children.forEach(this._getNewData.bind(this));
+    this._initChildren();
+    console.log("this.children", this.children);
+    console.log("this.childrenInitData", this.childrenInitData);
+    console.log("this.datas", this.datas);
+  }
+
+  _processData(options, index) {
     switch (options.type) {
       case "circle":
-        return getCircleData(options)
+        return getCircleData(options, index);
     }
   }
 
-  _handleChildInstantiation(options) {
+  _handleChildInstantiation(options, index) {
     switch (options.type) {
       case "circle":
         return new CircleLine({
           canvas: this.canvas,
           ctx: this.ctx,
           name: options.name,
+          index: index,
           animation: options.animation
         });
     }
@@ -78,10 +98,14 @@ class GRender {
     this.render();
   }
 
+  _changeOrder(name, order) {
+    this.datas[name].index = order;
+  }
+
   _addChild(child) {
     this.children.push(child);
-    this.datas[child.name] = this._processData(child)
-    this.childrenInstance.push(this._handleChildInstantiation(child))
+    this._getNewData(child, this.children.length - 1);
+    this.childrenInstance.push(this._handleChildInstantiation(child));
   }
 
   _updateChild(newData) {
@@ -92,7 +116,32 @@ class GRender {
     // update this.children
     _target.data = { ..._target.data, ...newData.data };
     // update this.datas
-    this.datas[newData.name].data = { ...this.datas[newData.name].data, ...this._processData(_target).data };
+    this.datas[newData.name].data = {
+      ...this.datas[newData.name].data,
+      ...this._processData(_target).data
+    };
+  }
+
+  handleHover(x, y) {
+    this.childrenInstance.forEach(child => {
+      if (child.inPath(x, y)) {
+        this.setOption({
+          name: child.name,
+          data: {
+            shadow: HOVERSHADOW
+          }
+        });
+        this._changeOrder(child.name, this.childrenInstance.length);
+      } else {
+        this.setOption({
+          name: child.name,
+          data: {
+            shadow: DEFAULTSHADOW
+          }
+        });
+        this._changeOrder(child.name, this.childrenInitData[child.name].index);
+      }
+    });
   }
 
   setOption(newOptions) {
@@ -106,19 +155,16 @@ class GRender {
 
   render() {
     this._renderChildren();
-    // this.animation();
-  }
-
-  animation() {
-    this.childrenInstance.forEach(child => {
-      console.log(child.data.updateSpeed);
-    });
   }
 
   _renderChildren() {
-    this.childrenInstance.forEach(child => {
-      child.render({ ...this.datas[child.name].data });
-    });
+    this.childrenInstance
+      .sort((before, after) => {
+        return this.datas[before.name].index - this.datas[after.name].index;
+      })
+      .forEach(child => {
+        child.render({ ...this.datas[child.name].data });
+      });
   }
 }
 

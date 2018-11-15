@@ -76,7 +76,7 @@ const render = new GRender({
       },
       data: {
         radius: loading.size,
-        center,
+        center: { x: center.x + 20, y: center.y },
         lineWidth: loadingBar.width,
         color: loadingBar.color,
         startAngle: -Math.PI / 2,
@@ -101,7 +101,7 @@ const render = new GRender({
           x: 200,
           y: 100
         },
-        lineWidth: 2,
+        lineWidth: 20,
         color: "red",
         startAngle: -Math.PI / 2,
         howLong: {
@@ -124,8 +124,8 @@ actionAddBtn.addEventListener(
       type: "circle",
       data: {
         radius: 10 + count * 3,
-        center: center,
-        lineWidth: 1,
+        center: { x: center.x  + count * 2, y: center.y },
+        lineWidth: 5,
         color: randomItem(colors),
         startAngle: -Math.PI / 2,
         howLong: {
@@ -182,5 +182,10 @@ const loadingFn = () => {
 
 window.onload = function() {
   render.draw();
-  loadingFn();
+  // loadingFn();
+  circleLoadingCanvas.addEventListener("mousemove", function(e) {
+    const x = e.clientX - circleLoadingCanvas.getBoundingClientRect().left;
+    const y = e.clientY - circleLoadingCanvas.getBoundingClientRect().top;
+    render.handleHover(x, y);
+  });
 };
