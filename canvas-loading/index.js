@@ -182,5 +182,5 @@ const loadingFn = () => {
 
 window.onload = function() {
   render.draw();
-  loadingFn();
+  // loadingFn();
 };

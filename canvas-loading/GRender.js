@@ -106,7 +106,7 @@ class GRender {
 
   render() {
     this._renderChildren();
-    // this.animation();
+    this.animation();
   }
 
   animation() {
