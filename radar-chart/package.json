@@ -1,0 +1,11 @@
+{
+  "name": "radar-chart",
+  "version": "1.0.0",
+  "description": "A normal parcel project",
+  "author": "Roy Luo",
+  "private": false,
+  "scripts": {
+    "test": "npm run unit",
+    "start": "parcel index.html"
+  }
+}
