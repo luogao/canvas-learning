@@ -196,7 +196,7 @@ function drawRadar() {
     if (currentAngle === toAngle) {
       return drawVertexDot()
     }
-    let newAngle = currentAngle + 0.25
+    let newAngle = currentAngle + 0.01
     if (newAngle > toAngle) newAngle = toAngle
     // requestAnimationFrame(() => {
     //   rqDraw(newAngle)
