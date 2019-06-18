@@ -1,0 +1,14 @@
+{
+  "name": "better-pic",
+  "version": "1.0.0",
+  "description": "A normal parcel project",
+  "author": "Roy Luo",
+  "private": false,
+  "scripts": {
+    "test": "npm run unit",
+    "start": "parcel index.html"
+  },
+  "dependencies": {
+    "rgbaster": "^2.1.1"
+  }
+}
