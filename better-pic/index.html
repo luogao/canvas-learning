@@ -18,14 +18,20 @@
         <canvas id="forshow"></canvas>
       </div>
     
-  <label for="uploader" class="upload-btn">upload
-    <input type="file" id="uploader" hidden accept="image/jpeg, image/jpg, image/png"></input>
-  </label>
-  
-    
-  <label for="downloader" id="downloader" class="download-btn">download
-  </label>
-  
+      <div class="control-wrapper">
+        <label for="uploader" class="upload-btn control-item">upload
+          <input type="file" id="uploader" hidden accept="image/jpeg, image/jpg, image/png"></input>
+        </label>
+        
+          
+        <label for="downloader" id="downloader" class="download-btn control-item">download
+        </label>
+        <label for="" class="control-item">
+          img size
+          <input type="range" name="" id="img-scale" value="0.9" min="0.5" max="0.9" step="0.05">
+        </label>
+      </div>
+
   <div id="color-container">
 / upload a image /
   </div>

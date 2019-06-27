@@ -33,14 +33,25 @@ body {
 }
 
 #bg,
-#shadow {
+#shadow,
+#forshow {
   max-width: 90%;
   max-height: 90%;
 }
+.control-wrapper {
+  position: absolute;
+  top: 1em;
+  left: 1em;
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  height: 70vh;
+  overflow: auto;
+  text-align: center;
+}
 
-#forshow {
-  max-width: 70%;
-  max-height: 70%;
+.control-wrapper .control-item + .control-item {
+  margin-top: 50px;
 }
 
 .upload-btn,
@@ -49,15 +60,9 @@ body {
   padding: 0.5em 0.75em;
   font-size: 1.5em;
   cursor: pointer;
-  z-index: 99;
   background: #fff;
-  position: absolute;
-  top: 1em;
-  left: 1em;
 }
-.download-btn {
-  margin-top: 100px;
-}
+
 .download-btn:active,
 .upload-btn:active {
   opacity: 0.8;
