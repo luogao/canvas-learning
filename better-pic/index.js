@@ -8,6 +8,10 @@ let canvasHeight = 0
 
 let imgPositionTop = 0
 let imgPositionLeft = 0
+let shadowColor = 'rgba(0,0,0,0.6)'
+let shadowBlur = 100
+let shadowOffsetX = 100
+let shadowOffsetY = 100
 
 let imgToDraw = null
 
@@ -23,6 +27,10 @@ const ctxShadow = canvasShadow.getContext('2d')
 const uploader = document.getElementById('uploader')
 const downloader = document.getElementById('downloader')
 const scaleControl = document.getElementById('img-scale')
+const shadowColorControl = document.getElementById('shadow-color')
+const shadowBlurControl = document.getElementById('shadow-blur')
+const shadowOffsetXControl = document.getElementById('shadow-offset-x')
+const shadowOffsetYControl = document.getElementById('shadow-offset-y')
 const container = document.getElementById('color-container')
 
 const outputCanvas = document.createElement('canvas')
@@ -31,11 +39,37 @@ const outputCtx = outputCanvas.getContext('2d')
 uploader.addEventListener('change', handleUploaderChange)
 downloader.addEventListener('click', handleDownload)
 scaleControl.addEventListener('change', handleScaleChange)
+shadowColorControl.addEventListener('change', handleShadowColorChange)
+shadowBlurControl.addEventListener('change', handleShadowBlurChange)
+shadowOffsetXControl.addEventListener('input', handleShadowOffsetXChange)
+shadowOffsetYControl.addEventListener('input', handleShadowOffsetYChange)
+
+function handleShadowOffsetXChange(e) {
+  shadowOffsetX = Number(e.target.value)
+  drawShadow()
+}
+
+function handleShadowOffsetYChange(e) {
+  shadowOffsetY = Number(e.target.value)
+  drawShadow()
+}
+
+function handleShadowBlurChange(e) {
+  const blur = Number(e.target.value)
+  shadowBlur = blur
+  drawShadow()
+}
 
 function handleScaleChange(e) {
   scale = Number(e.target.value)
   drawImg(imgToDraw)
 }
+
+function handleShadowColorChange(e) {
+  shadowColor = e.target.value
+  drawShadow()
+}
+
 function handleDownload() {
   drawOutputCanvas()
   downloadFile(generate(), getImgSrc(outputCanvas))
@@ -82,10 +116,10 @@ function initCanvas() {
 
 function drawShadow() {
   ctxShadow.clearRect(0, 0, canvasWidth, canvasHeight)
-  ctxShadow.shadowColor = 'rgba(0,0,0,0.6)'
-  ctxShadow.shadowBlur = 100
-  ctxShadow.shadowOffsetX = 100
-  ctxShadow.shadowOffsetY = 100
+  ctxShadow.shadowColor = shadowColor
+  ctxShadow.shadowBlur = shadowBlur
+  ctxShadow.shadowOffsetX = shadowOffsetX
+  ctxShadow.shadowOffsetY = shadowOffsetY
   ctxShadow.fillRect(imgPositionLeft, imgPositionTop, canvasWidth * scale, canvasHeight * scale)
 }
 
