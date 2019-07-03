@@ -1,10 +1,12 @@
 import './index.css'
 import analyze from 'rgbaster'
+import downloadFile from './utils/downloadCanvas'
 
 const SLICE_LENGTH = -1
 let scale = 0.9
 let canvasWidth = 0
 let canvasHeight = 0
+let showVisible = false
 
 let imgPositionTop = 0
 let imgPositionLeft = 0
@@ -27,11 +29,13 @@ const ctxShadow = canvasShadow.getContext('2d')
 const uploader = document.getElementById('uploader')
 const downloader = document.getElementById('downloader')
 const scaleControl = document.getElementById('img-scale')
+const shadowVisibleControl = document.getElementById('shadow-visible')
 const shadowColorControl = document.getElementById('shadow-color')
 const shadowBlurControl = document.getElementById('shadow-blur')
 const shadowOffsetXControl = document.getElementById('shadow-offset-x')
 const shadowOffsetYControl = document.getElementById('shadow-offset-y')
 const container = document.getElementById('color-container')
+const shadowControl = document.getElementById('shadow-control')
 
 const outputCanvas = document.createElement('canvas')
 const outputCtx = outputCanvas.getContext('2d')
@@ -39,10 +43,28 @@ const outputCtx = outputCanvas.getContext('2d')
 uploader.addEventListener('change', handleUploaderChange)
 downloader.addEventListener('click', handleDownload)
 scaleControl.addEventListener('change', handleScaleChange)
+shadowVisibleControl.addEventListener('change', hanldeShadowVisibleChange)
 shadowColorControl.addEventListener('change', handleShadowColorChange)
 shadowBlurControl.addEventListener('change', handleShadowBlurChange)
 shadowOffsetXControl.addEventListener('input', handleShadowOffsetXChange)
 shadowOffsetYControl.addEventListener('input', handleShadowOffsetYChange)
+
+function hanldeShadowVisibleChange(e) {
+  showVisible = e.target.checked
+  if (showVisible) {
+    showShadowSetting()
+  } else {
+    hideShadowSetting()
+  }
+  drawShadow()
+}
+
+function showShadowSetting() {
+  shadowControl.style.display = 'flex'
+}
+function hideShadowSetting() {
+  shadowControl.style.display = 'none'
+}
 
 function handleShadowOffsetXChange(e) {
   shadowOffsetX = Number(e.target.value)
@@ -72,41 +94,13 @@ function handleShadowColorChange(e) {
 
 function handleDownload() {
   drawOutputCanvas()
-  downloadFile(generate(), getImgSrc(outputCanvas))
-}
-
-function base64Img2Blob(code) {
-  var parts = code.split(';base64,')
-  var contentType = parts[0].split(':')[1]
-  var raw = window.atob(parts[1])
-  var rawLength = raw.length
-
-  var uInt8Array = new Uint8Array(rawLength)
-
-  for (var i = 0; i < rawLength; ++i) {
-    uInt8Array[i] = raw.charCodeAt(i)
-  }
-
-  return new Blob([uInt8Array], { type: contentType })
-}
-
-function getImgSrc(canvas) {
-  const dataUrl = canvas.toDataURL('image/png')
-  return dataUrl
+  downloadFile(generate(), outputCanvas)
 }
 
 function generate() {
   const logoMarker = 'BP'
   const date = new Date().toLocaleDateString()
   return `${logoMarker}-${date}`
-}
-
-function downloadFile(fileName, content) {
-  var aLink = document.createElement('a')
-  var blob = base64Img2Blob(content) //new Blob([content]);
-  aLink.download = fileName
-  aLink.href = URL.createObjectURL(blob)
-  aLink.click()
 }
 
 function initCanvas() {
@@ -116,11 +110,13 @@ function initCanvas() {
 
 function drawShadow() {
   ctxShadow.clearRect(0, 0, canvasWidth, canvasHeight)
-  ctxShadow.shadowColor = shadowColor
-  ctxShadow.shadowBlur = shadowBlur
-  ctxShadow.shadowOffsetX = shadowOffsetX
-  ctxShadow.shadowOffsetY = shadowOffsetY
-  ctxShadow.fillRect(imgPositionLeft, imgPositionTop, canvasWidth * scale, canvasHeight * scale)
+  if (showVisible) {
+    ctxShadow.shadowColor = shadowColor
+    ctxShadow.shadowBlur = shadowBlur
+    ctxShadow.shadowOffsetX = shadowOffsetX
+    ctxShadow.shadowOffsetY = shadowOffsetY
+    ctxShadow.fillRect(imgPositionLeft, imgPositionTop, canvasWidth * scale, canvasHeight * scale)
+  }
 }
 
 function drawImg(img) {
@@ -180,6 +176,6 @@ function drawBg(color) {
 function drawOutputCanvas() {
   outputCtx.clearRect(0, 0, canvasWidth, canvasHeight)
   outputCtx.drawImage(canvasBg, 0, 0, canvasWidth, canvasHeight)
-  outputCtx.drawImage(canvasShadow, 0, 0, canvasWidth, canvasHeight)
+  showVisible && outputCtx.drawImage(canvasShadow, 0, 0, canvasWidth, canvasHeight)
   outputCtx.drawImage(canvasForShow, 0, 0, canvasWidth, canvasHeight)
 }

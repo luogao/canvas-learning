@@ -50,7 +50,18 @@ body {
   text-align: center;
 }
 
-.control-wrapper .control-item + .control-item {
+#shadow-control {
+  display: none;
+  flex-direction: column;
+  overflow: auto;
+  text-align: center;
+}
+
+#shadow-control .control-item {
+  margin-top: 50px;
+}
+
+.control-wrapper .control-item:not(:first-child) {
   margin-top: 50px;
 }
 
