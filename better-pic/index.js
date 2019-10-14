@@ -154,6 +154,12 @@ function handleUploaderChange() {
           container.appendChild(node)
         })
 
+        const node = document.createElement('span')
+        node.setAttribute('data-color', '#fff')
+        node.style.cssText = `width: 50px;height:50px;background-color: #fff`
+        container.prepend(node)
+
+        // drawBg(colors[Math.floor(Math.random() * colors.length)].color)
         drawBg(colors[Math.floor(Math.random() * colors.length)].color)
       })
     }
