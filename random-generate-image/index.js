@@ -1,9 +1,9 @@
 import './index.css'
 
 const CANVAS_SIZE = 600
-const step = 1
+const step = 10
 
-const colorArr = ['#003f5c', '#58508d', '#bc5090', '#ff6361']
+const colorArr = ['#003f5c', '#58508d', '#bc5090', '#ff6361', '#ffd369', '#e26241', '#940a37', '#5b0909', '#00818a', '#ec9b3b']
 const randomColor = `#${(~~(Math.random() * (1 << 24))).toString(16)}`
 const canvas = document.getElementById('canvas')
 const ctx = canvas.getContext('2d')
