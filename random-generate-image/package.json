@@ -1,0 +1,21 @@
+{
+  "name": "random-generate-image",
+  "version": "1.0.0",
+  "description": "A normal parcel project",
+  "author": "Roy Luo",
+  "private": false,
+  "scripts": {
+    "test": "npm run unit",
+    "start": "parcel index.html",
+    "build": "parcel build index.html --public-url ./",
+    "predeploy": "rm -rf ./dist && npm run build",
+    "deploy": "gh-pages -d dist"
+  },
+  "dependencies": {
+    "parcel": "^1.12.3"
+  },
+  "devDependencies": {
+    "cssnano": "^4.1.10",
+    "gh-pages": "^2.0.1"
+  }
+}
